@@ -31,7 +31,13 @@ public:
 	// Callback Function
 	void Horizontal(float v);
 	void Vertical(float v);
+	// 발사 버튼 처리할 함수
+	void Fire();
 public:
+	// 필요속성 : 총알공장
+	UPROPERTY(EditAnywhere, Category=Setting)
+	TSubclassOf<class ABullet> bulletFactory;
+
 	// StaticMesh Component
 	UPROPERTY(VisibleAnywhere, Category=BodyMesh)
 	class UStaticMeshComponent* body;

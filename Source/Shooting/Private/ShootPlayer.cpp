@@ -2,6 +2,7 @@
 
 
 #include "ShootPlayer.h"
+#include "Bullet.h"
 
 // Sets default values
 AShootPlayer::AShootPlayer()
@@ -44,6 +45,10 @@ void AShootPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent->BindAxis(TEXT("Horizontal"), this, &AShootPlayer::Horizontal);
 	PlayerInputComponent->BindAxis(TEXT("Vertical"), this, &AShootPlayer::Vertical);
+
+	// 발사버튼 bind
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &AShootPlayer::Fire);
+
 }
 
 void AShootPlayer::Horizontal(float v)
@@ -54,5 +59,14 @@ void AShootPlayer::Horizontal(float v)
 void AShootPlayer::Vertical(float v)
 {
 	dir.Z = v;
+}
+
+void AShootPlayer::Fire()
+{
+	// 총알 발사
+	// 총알을 만들어야 한다.
+	auto bullet = Cast<ABullet>(GetWorld()->SpawnActor(bulletFactory));
+	// 위치지정
+	bullet->SetActorLocation(GetActorLocation());
 }
 

@@ -30,6 +30,11 @@ void ABullet::BeginPlay()
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	// 총알이 계속 위로 올라가도록 하고 싶다.
+	// P = P0 + vt
+	FVector P0 = GetActorLocation();
+	FVector vt = FVector::UpVector * speed * DeltaTime;
+	FVector P = P0 + vt;
+	SetActorLocation(P);
 }
 
